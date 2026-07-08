@@ -170,7 +170,10 @@ button { font-family: var(--font); cursor: pointer; }
 .has-dropdown > a::after { content: ' ▾'; font-size: 11px; }
 .dropdown {
   display: flex; flex-direction: column;
-  position: absolute; top: calc(100% + 3px); left: 0;
+  /* 【調整】ピルとの間隔。親ピルの下端(パディング5px)より下に出して
+     背景が重ならないようにしている。狭めたい/広げたいときはこの px を変更。
+     ※小さくしすぎるとピルと重なるので +10px 以上を推奨。 */
+  position: absolute; top: calc(100% + 12px); left: 0;
   background: var(--nav-pill-bg);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
@@ -183,11 +186,12 @@ button { font-family: var(--font); cursor: pointer; }
      カーソルを戻せばメニューはそのまま開き続ける。 */
   transition: opacity .18s ease .25s, transform .18s ease .25s, visibility 0s linear .43s;
 }
-/* 親リンクとメニューの間の隙間（3px）を透明な帯でつなぎ、
-   カーソルが隙間を通ってもホバーが切れないようにする */
+/* 親リンクとメニューの間の隙間を透明な帯でつなぎ、
+   カーソルが隙間を通ってもホバーが切れないようにする
+   （上のピルまで少し食い込ませて、間隔を広げてもホバーが途切れないようにする） */
 .dropdown::before {
   content: ""; position: absolute;
-  top: -14px; left: -8px; right: -8px; height: 14px;
+  top: -18px; left: -8px; right: -8px; height: 18px;
 }
 /* マウス環境のみ：ホバーで子メニューを開く（タッチ端末は「記録」タップで
    親ページ /records へ移動し、そこから子ページへ進む動線になる） */
