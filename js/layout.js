@@ -127,6 +127,8 @@ var SITE_FOOTER_HTML = `
 /* ---------- ④ 起動スプラッシュ（触る必要はありません） ----------
    ・そのセッション（＝ブラウザでサイトを開いてから閉じるまで）で
      最初の1回だけ、紫の全画面＋中央ロゴのアニメーションを表示する。
+   ・ページを再読み込み（リロード）したときも表示する。
+     ※ページ間の移動（別ページへのリンク・戻る/進む）では表示しない。
    ・ヘッダーのロゴをタップしたときも再生してからトップへ移動する。
    ・OSの「視差効果を減らす」設定の人には表示しない（酔い・負担への配慮）。
    【調整】表示時間を変えたいとき：下の SPLASH_TOTAL_MS（全体）を変更 */
@@ -159,11 +161,25 @@ var SITE_FOOTER_HTML = `
     setTimeout(function () { el.remove(); }, SPLASH_TOTAL_MS);
   }
 
-  /* 1) セッション最初の1回だけ自動再生 */
+  /* このページ表示が「リロード（再読み込み）」かどうかを判定する。
+     ・F5／⌘+R などの再読み込み → true
+     ・別ページからのリンク移動・戻る/進む → false
+     （そのため、ページ移動では再生されず、リロードでだけ再生される） */
+  function isReload() {
+    try {
+      var navs = performance.getEntriesByType('navigation');
+      if (navs && navs.length) return navs[0].type === 'reload';
+      /* 古いブラウザ向けフォールバック（TYPE_RELOAD = 1） */
+      if (performance.navigation) return performance.navigation.type === 1;
+    } catch (e) {}
+    return false;
+  }
+
+  /* 1) セッション最初の1回、またはリロード時に自動再生 */
   var KEY = 'ait-splash-shown';
   var shown = false;
   try { shown = sessionStorage.getItem(KEY) === '1'; } catch (e) {}
-  if (!shown && !reduceMotion) {
+  if ((!shown || isReload()) && !reduceMotion) {
     try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
     play();
   }
