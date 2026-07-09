@@ -390,12 +390,12 @@ body.nav-open .to-top { opacity: 0; visibility: hidden; pointer-events: none; }
 /* === NEWS === */
 .news-list { border-top: 2px solid var(--primary); }
 .news-item {
-  display: flex; 
-  align-items: flex-start; 
+  display: flex;
+  align-items: flex-start;
   gap: 20px;
-  padding: 16px 12px; 
+  padding: 16px 12px;
   border-bottom: 1px solid var(--border);
-  border-radius: 6px; 
+  border-radius: 6px;
   transition: background var(--t);
 }
 @media (hover: hover) and (pointer: fine) {
@@ -405,7 +405,7 @@ body.nav-open .to-top { opacity: 0; visibility: hidden; pointer-events: none; }
 .news-title { font-size: 15px; color: var(--text); }
 @media (hover: hover) and (pointer: fine) {
   .news-item .news-item-inner .news-title:hover {
-    text-decoration: underline; 
+    text-decoration: underline;
     color: var(--primary);
   }
 }
@@ -804,15 +804,15 @@ body.nav-open .to-top { opacity: 0; visibility: hidden; pointer-events: none; }
 .contact-intro .note { font-size: 13px; color: var(--sub); }
 
 /* === Fade-up animation === */
-.fade-up { 
-  opacity: 0; 
-  transform: translateY(22px); 
-  transition: opacity 0.65s ease, 
-  transform 0.65s ease; 
+.fade-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s ease,
+  transform 0.65s ease;
 }
-.fade-up.visible { 
-  opacity: 1; 
-  transform: translateY(0); 
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* === 404 Page === */
