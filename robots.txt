@@ -1,0 +1,6 @@
+# 愛知工業大学 陸上競技部 公式サイト
+# すべての検索エンジンにクロールを許可し、サイトマップの場所を伝えます。
+User-agent: *
+Allow: /
+
+Sitemap: https://ait-athletics.github.io/sitemap.xml
